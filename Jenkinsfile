@@ -100,7 +100,7 @@ pipeline {
              }
           }
         }
-          stage('Continuous deployment') {
+         stage('Continuous deployment') {
           steps {
              script {
               sshPublisher(
@@ -125,6 +125,17 @@ pipeline {
              }
           }
         }
-
+	    
+      stage('Checkout Selenium') {
+            steps {
+                echo "-=- Checkout project -=-"
+                git url: 'https://github.com/zaba221/example-springboot-automation-test-selenium.git'
+            }
+        }
+        stage('Selenium Test Job') {
+            steps {
+                 build job: 'projet-selenium' 
+            }
+        }
     }
 }
